@@ -1,5 +1,8 @@
 <?php 
 include 'header.php';
+
+
+
 ?>
 
 
@@ -21,35 +24,20 @@ include 'header.php';
                 <div class="profile-info">
                    <img src="
                <?php 
-               if($kullanicicek['kullanici_foto']!=NULL )
-               echo $kullanicicek['kullanici_foto']; 
+               if($kullanicicek['kullanici_foto']!=NULL ){
+                if($kullanicicek['kullanici_fotonay']==1){
+               echo $kullanicicek['kullanici_foto'];}
+               else{
+                echo "images/awaiting.png";
+               }
+                }
                else
-               echo "http://placehold.it/300x300";
-
+                echo "images/nopic.png";
                ?> "  alt="" class="img-responsive profile-photo" />
                   
                   <h3><?php echo $kullanicicek['kullanici_ad'];   ?> </h3>
 
                   
-
-                  <div class="send-message">
-                    
-                    <div class="input-group">
-                      <textarea name="texts" id="exampleTextarea" cols="100%" rows="15" class="form-control" placeholder="Write your message" spellcheck="false"></textarea>
-                      <span class="notice">You've 5 daily message credits .
-                      </span><br>
-                      <span class="">
-                        <button class="btn-primary">Send Message</button>
-                      </span>
-                      
-                    <!--  <div class="notice">You've used all your daily message credits today and you cannot send any more messages.<br>
-                        Your credits will be reset every day between 12:00 AM/PST and 12:30 AM/PST.
-                      </div><br>
-                    -->
-
-
-                    </div>
-                   </div>
                    <br>
                    <p class="text-muted"><ion-icon name="person"></ion-icon> Member Since <b>
 
@@ -65,14 +53,36 @@ include 'header.php';
 
 
                    </b></p>
-                  <p class="text-muted"><ion-icon name="eye"></ion-icon> Profile viewed <b>x </b> times</p>
-                  <p class="text-muted"><ion-icon name="wifi"></ion-icon> Last login <b>x days </b> ago</p>
+                  <p class="text-muted"><ion-icon name="eye"></ion-icon> Profile viewed <b>x </b> times (Soon)</p>
+                  <p class="text-muted"><ion-icon name="wifi"></ion-icon> Last login <b>
+
+
+  <?php 
+$id=$kullanicicek['kullanici_id'];
+$lastkullanicisor=$db->prepare("SELECT * FROM lastlogin where kullanici_id=:kullanici_id");
+$lastkullanicisor->execute(array(
+      'kullanici_id' => $id
+  ));
+$lastkullanicicek=$lastkullanicisor->fetch(PDO::FETCH_ASSOC);
+
+?> 
+
+
+ <?php date_default_timezone_set('Europe/Istanbul'); ?>
+
+
+ <?php  echo date("h:i", strtotime($lastkullanicicek['last_time'])); ?>
+
+
+                    </b>
+ <?php  echo date("M", strtotime($lastkullanicicek['last_time'])); ?> 
+ <?php  echo date("d", strtotime($lastkullanicicek['last_time'])); ?> 
+ <?php  echo date("Y", strtotime($lastkullanicicek['last_time'])); ?>
+
+</p>
                   <p class="text-muted"><ion-icon name="alert-circle"></ion-icon> <a>report profile</a> </p>
                  
-                    <button class="btn btn-primary" id="button" type="button" value="Follow" onclick="showMore()" > <ion-icon name="person-add"></ion-icon> Follow </button>
-                     <div id="d3">
-                        <button class="btn btn-primary" type="button" value="Show less" onclick="showLess()"> <ion-icon name="close-circle"></ion-icon> Unfollow</button>
-                      </div>
+                  
 
 
 
@@ -131,20 +141,22 @@ function showLess() {
           <!--Timeline Menu for Small Screens-->
           <div class="navbar-mobile hidden-lg hidden-md">
             <div class="profile-info">
-               <img src="
+                   <img src="
                <?php 
-               if($kullanicicek['kullanici_foto']!=NULL )
-               echo $kullanicicek['kullanici_foto']; 
+               if($kullanicicek['kullanici_foto']!=NULL ){
+                if($kullanicicek['kullanici_fotonay']==1){
+               echo $kullanicicek['kullanici_foto'];}
+               else{
+                echo "images/awaiting.png";
+               }
+                }
                else
-               echo "http://placehold.it/300x300";
-
-               ?> " 
-
-               alt="" class="img-responsive profile-photo" />
+                echo "images/nopic.png";
+               ?> "  alt="" class="img-responsive profile-photo" />
               <h4><?php echo  substr($kullanicicek['kullanici_ad'],0,10)   ?></h4>
                 <div class="about-content-block">
                   <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i> <?php echo  $kullanicicek['kullanici_country']   ?>
-                  <!-- <img src="images/hr.gif"/>--></h4>
+                   <img src="images/flags/<?php echo $kullanicicek['kullanici_country']?>.png"/></h4>
                 </div>
                 <button class="btn btn-primary" id="button" type="button" value="Follow" onclick="showMore()" > <ion-icon name="person-add"></ion-icon> Follow </button>
                  <div id="d3">
@@ -221,8 +233,8 @@ function showLess() {
                 </div>
 
                 <div class="about-content-block">
-                  <h4 class="grey"><ion-icon name="location"></ion-icon> Current Country: <b class="boldie"><?php echo $kullanicicek['kullanici_country'];   ?> </b> <!-- <img src="images/hr.gif"/> --></h4>
-                  <h4 class="grey"> <ion-icon name="egg"></ion-icon> Birth Country: <b class="boldie"><?php echo $kullanicicek['kullanici_Bcountry'];   ?></b> <!--<img src="images/hr.gif"/>--></h4>
+                  <h4 class="grey"><ion-icon name="location"></ion-icon> Current Country: <b class="boldie"><?php echo $kullanicicek['kullanici_country'];   ?> </b>  <img src="images/flags/<?php echo $kullanicicek['kullanici_country']?>.png"/> </h4>
+                  <h4 class="grey"> <ion-icon name="egg"></ion-icon> Birth Country: <b class="boldie"> <?php echo $kullanicicek['kullanici_Bcountry'];   ?></b> <img src="images/flags/<?php echo $kullanicicek['kullanici_Bcountry']?>.png"/> </h4>
                   <h4 class="grey"> <ion-icon name="search"></ion-icon> Looking for <b class="boldie"> <?php echo $kullanicicek['kullanici_lookGen'];   ?> </b> penpals  Between <b class="boldie"> <?php echo $kullanicicek['kullanici_lookAgeOne'];   ?></b> and <b class="boldie">
                     <?php echo $kullanicicek['kullanici_lookAgeTwo'];   ?> </b>  </h4>
 
@@ -230,13 +242,13 @@ function showLess() {
                   <h4 class="grey"><ion-icon name="accessibility"></ion-icon> 
                     <b class="boldie">
                       <?php
-    date_default_timezone_set('Europe/Istanbul');
- $age=$kullanicicek['kullanici_yil'];
- $today=date("Y");
- $result=$today-$age;
- echo $result;
+                       date_default_timezone_set('Europe/Istanbul');
+                       $age=$kullanicicek['kullanici_yil'];
+                       $today=date("Y");
+                       $result=$today-$age;
+                       echo $result;
 
-?>
+                      ?>
         </b>years old <b class="boldie"> <?php echo $kullanicicek['kullanici_gender'];   ?> </b></h4>
                   <h4 class="grey"> <ion-icon name="heart"></ion-icon> Status :  <b class="boldie"> <?php echo $kullanicicek['kullanici_iliski'];   ?></b>   </h4>
                   <h4 class="grey"> <ion-icon name="logo-linkedin"></ion-icon> Job : <b class="boldie"> <?php echo $kullanicicek['kullanici_meslek'];   ?></b>   </h4>
@@ -328,101 +340,78 @@ function showLess() {
                   <h4 class="grey2">  LAST  <b class="boldie">COMMENTS</b>   </h4> <br>
                 </center>
                 </div>
-                  <!-- Post Content
-              ================================================= -->
-               <div class="post-content">
-               <div class="post-container">
-                  <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
-                  <div class="post-detail">
-                    <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">15 mins ago</span></h5>
-                     <!-- <p class="text-muted">Published a photo about 15 mins ago</p> -->
-                    </div>
-                    <div class="post-text">
-                      <p class="fontbigger2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  <!-- Post Content-->
+       
+
+<?php 
+
+$wall_id=$kullanicicek['kullanici_id'];
+
+  $commentsor=$db->prepare("SELECT * FROM wallcomment where wall_id=:wall_id order by com_zaman DESC limit 10");
+  $commentsor->execute(array(
+                'wall_id' => $wall_id,
+                )); 
+
+             $say=0;
+      while($commentcek=$commentsor->fetch(PDO::FETCH_ASSOC)) { $say++;
+
+                   
+   $id=$commentcek['kullanici_id'];
+   $lastkullanicisor=$db->prepare("SELECT * FROM kullanici where kullanici_id=:kullanici_id");
+    $lastkullanicisor->execute(array(
+      'kullanici_id' => $id
+
+  ));
+
+    $say=$lastkullanicisor->rowCount();
+    $lastkullanicicek=$lastkullanicisor->fetch(PDO::FETCH_ASSOC);
 
 
-               <div class="post-content">
-               <div class="post-container">
-                  <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
-                  <div class="post-detail">
-                    <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">15 mins ago</span></h5>
-                     <!-- <p class="text-muted">Published a photo about 15 mins ago</p> -->
-                    </div>
-                    <div class="post-text">
-                      <p class="fontbigger2">Lorem ipsum dolor sit amet, consectetur adipiscing elit? <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+?>
 
 
-              <div class="post-content">
-               <div class="post-container">
-                  <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
-                  <div class="post-detail">
-                    <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">15 mins ago</span></h5>
-                     <!-- <p class="text-muted">Published a photo about 15 mins ago</p> -->
-                    </div>
-                    <div class="post-text">
-                      <p class="fontbigger2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
 
 
               <div class="post-content">
                <div class="post-container">
-                  <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
+                  <img src="<?php echo $lastkullanicicek['kullanici_foto'] ?>" alt="user" class="profile-photo-md pull-left" />
                   <div class="post-detail">
                     <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">15 mins ago</span></h5>
+                      <h5><a href="profileShow.php?kullanici_id=<?php echo $lastkullanicicek['kullanici_id']; ?>" class="profile-link"><?php echo $lastkullanicicek['kullanici_ad']; ?></a> <span class="following"> 
+
+ <?php date_default_timezone_set('Europe/Istanbul'); ?>
+
+
+ (<?php  echo date("H:i", strtotime($commentcek['com_zaman'])); ?>
+
+) 
+                    </b>
+ <?php  echo date("M", strtotime($commentcek['com_zaman'])); ?> 
+ <?php  echo date("d", strtotime($commentcek['com_zaman'])); ?> 
+ <?php  echo date("Y", strtotime($commentcek['com_zaman'])); ?>
+
+
+
+                          </span></h5>
                      <!-- <p class="text-muted">Published a photo about 15 mins ago</p> -->
                     </div>
                     <div class="post-text">
-                      <p class="fontbigger2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="post-content">
-               <div class="post-container">
-                  <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
-                  <div class="post-detail">
-                    <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">15 mins ago</span></h5>
-                     <!-- <p class="text-muted">Published a photo about 15 mins ago</p> -->
-                    </div>
-                    <div class="post-text">
-                      <p class="fontbigger2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+                      <p class="fontbigger2"> <?php echo $commentcek['com_detay']; ?> <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
                       <p><a href="#" ><i class="em em-anguished">report</i></a></p>
+
+
                     </div>
                   </div>
                 </div>
               </div>
 
 
-        <div class="notice">You have <b> 5 </b> credits left for today out of total 10 daily credits.
-        </div><br>
-              <div class="send-message">
+<?php  }?>
 
-                    <div class="input-group">
-                      <textarea name="texts" id="exampleTextarea" cols="100%" rows="5" class="form-control" placeholder="Write your comment on user's wall" spellcheck="false"></textarea>
-                      <span class="">
-                        <button class="btn btn-primary" type="button">Post</button>
-                      </span>
-                    </div>
-              </div>
-              <br>
+
+        <br>
+              
 
 
               <!-- Post Content

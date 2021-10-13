@@ -12,7 +12,18 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info">
-                  <img src="<?php echo $kullanicicek['kullanici_foto'] ?>" alt="" class="img-responsive profile-photo" />
+                  <img src="
+               <?php 
+               if($kullanicicek['kullanici_foto']!=NULL ){
+                if($kullanicicek['kullanici_fotonay']==1){
+               echo $kullanicicek['kullanici_foto'];}
+               else{
+                echo "images/awaiting.png";
+               }
+                }
+               else
+                echo "images/nopic.png";
+               ?> "  alt="" class="img-responsive profile-photo" />
                  
                 </div>
               </div>
@@ -25,8 +36,18 @@
           <!--Timeline Menu for Small Screens-->
           <div class="navbar-mobile hidden-lg hidden-md">
             <div class="profile-info">
-              <img src="<?php echo $kullanicicek['kullanici_foto'] ?>" alt="" class="img-responsive profile-photo" />
-            
+             <img src="
+               <?php 
+               if($kullanicicek['kullanici_foto']!=NULL ){
+                if($kullanicicek['kullanici_fotonay']==1){
+               echo $kullanicicek['kullanici_foto'];}
+               else{
+                echo "images/awaiting.png";
+               }
+                }
+               else
+                echo "images/nopic.png";
+               ?> "  alt="" class="img-responsive profile-photo" />
             </div>
             
           </div><!--Timeline Menu for Small Screens End-->

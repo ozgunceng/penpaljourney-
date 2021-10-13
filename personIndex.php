@@ -17,6 +17,8 @@ include 'header.php';
             <div class="row">
               <div class="col-md-12">
                 <br><br>
+
+              <center>  <img src="images/logo200wb.png" > </center><br><br>
                 
 
                  <center>  <h4 class="grey2">  Welcome  <b class="boldie"><?php echo $kullanicicek['kullanici_ad'] ?></b>  </h4>  
@@ -41,43 +43,32 @@ include 'header.php';
               <!-- About
               ================================================= -->
               <div class="about-profile">
+
+                <div class="row">
+                  <div class="col">
                 <div class="about-content-block">
-                  <h4 class="grey fontbigger "><i class="ion-ios-information-outline icon-in-title"></i>We recommend you to edit your <a href="text.php" > profile text</a></h4>
+                <h4 class="grey fontbigger "><i class="ion-ios-information-outline icon-in-title"></i>We recommend you to edit your <a href="text.php" > profile text</a></h4>
                   <ul>
                     <li class="fontbigger"><a href="upload.php">Upload</a> Your Profile Picture</li><br>
-                    <li class="fontbigger">Write your <a href="edit.php">State/Province</a></li><br>                    
-                                       
-
+                    <li class="fontbigger">Write your <a href="edit.php">State/Province</a></li><br>                
                    </ul>
                   <p class="fontbigger">Do not forget to change your <a href="editpass.php" >password</a> regularly!</p>
                 </div>
-                <div class="about-content-block">
-                  <h4 class="grey fontbigger "><i class="ion-ios-information-outline icon-in-title"></i>What you can do?</h4>
-                
+                   </div>
+                   <div class="col">
 
-                   <ul>
+                <div class="about-content-block">
+                <h4 class="grey fontbigger "><i class="ion-ios-information-outline icon-in-title"></i>What you can do?</h4>
+                <ul>
                     <li class="fontbigger">You can see who viewed your profile</li><br>
                     <li class="fontbigger"><a href="search.php">Search </a> other penpals</li><br>                    
                     <li class="fontbigger">Look at your <a href="profile.php">comments</a></li><br>                    
-
-                   </ul>
+                </ul>
                   <p class="fontbigger">Do not forget to change your password regularly!</p>
-                
-              </div>
-
-                  <div class="about-content-block">
-                  <h4 class="grey fontbigger "><i class="ion-ios-information-outline icon-in-title"></i>WHAT VIP MEMBERS CAN DO?</h4>
-                
-
-                   <ul>
-                    <li class="fontbigger">See the <a>last 1000 logins</a></li><br>
-                    <li class="fontbigger"><a href="search.php">Search </a> other penpals</li><br>                    
-                    <li class="fontbigger">Look at your <a href="profile.php">comments</a></li><br>                    
-
-                   </ul>
-                  <p class="fontbigger">Do not forget to change your password regularly!</p>
-                
-              </div>
+                </div>
+                  </div>
+                </div>
+                 
 
             </div>
                <div class="people-nearby">
@@ -111,38 +102,59 @@ include 'header.php';
               <div class="nearby-user">
                 <div class="row">
                   <div class="col-md-2 col-sm-2">
-                    <img src="<?php echo $lastkullanicicek['kullanici_foto']; ?>" alt="" class="profile-photo-lg" />
+                    <img src="
+               <?php 
+               if($lastkullanicicek['kullanici_foto']!=NULL ){
+                if($lastkullanicicek['kullanici_fotonay']==1){
+               echo $lastkullanicicek['kullanici_foto'];}
+               else{
+                echo "images/awaiting.png";
+               }
+                }
+               else
+                echo "images/nopic.png";
+               ?> "  alt="" class="profile-photo-lg" />
+
+
                   </div>
                   <div class="col-md-7 col-sm-7">
                     <h4 class="grey">
-                      <a href="#" class="profile-link"><?php echo $lastkullanicicek['kullanici_ad']; ?></a>
+                      <a href="profileShow.php?kullanici_id=<?php echo $lastkullanicicek['kullanici_id'] ?>"><?php echo $lastkullanicicek['kullanici_ad']; ?></a>
 
-                      <b> Age:
+                      <b> AGE
 
                        <?php
-    date_default_timezone_set('Europe/Istanbul');
- $age=$lastkullanicicek['kullanici_yil'];
- $today=date("Y");
- $result=$today-$age;
- echo $result;
+                         date_default_timezone_set('Europe/Istanbul');
+                         $age=$lastkullanicicek['kullanici_yil'];
+                         $today=date("Y");
+                         $result=$today-$age;
+                         echo $result;
 
-?> 
-
-
-
+                        ?> 
 
 
                        </b>
-                      <br><br><b> <?php echo $lastkullanicicek['kullanici_country']; ?></b> <img src="images/hr.gif"/></h4>
+                      <br><br><b> <?php echo $lastkullanicicek['kullanici_country']; ?></b> <img src="images/flags/<?php echo $lastkullanicicek['kullanici_country']; ?>.png"/></h4>
+
+
 
 
                     <p class="fontbigger2"> looking for <b><?php echo $lastkullanicicek['kullanici_lookGen']; ?></b> between <b> <?php echo $lastkullanicicek['kullanici_lookAgeOne']; ?></b> and <b><?php echo $lastkullanicicek['kullanici_lookAgeTwo']; ?></b></p>
 
+                    <p class="fontbigger2"> <i>"<?php echo substr( $lastkullanicicek['kullanici_text'],0,100) ?>" </i></p>
 
+<hr>
                     <p class="text-muted fontbigger2">
 
-                      <b>3 minutes ago
+                     Seen <b> 
 
+
+ <?php
+
+date_default_timezone_set('Europe/Istanbul');
+   echo date("H:i", strtotime($lastlogincek['last_time'])); 
+
+   ?>
 
                       </b> 
 
@@ -164,13 +176,14 @@ include 'header.php';
                     </p>
                   </div>
                   <div class="col-md-3 col-sm-3">
-                   <a href="profile.php"> <button class="btn btn-primary pull-right">Send Message</button> </a>
+                   <a href="profileShow.php?kullanici_id=<?php echo $lastkullanicicek['kullanici_id']?>"> <button class="btn btn-primary pull-right">Send Message</button> </a>
                   </div>
                 </div>
               </div>
-            
+            <br>
 
                   <?php  }?>
+
 
 
 

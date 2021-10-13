@@ -39,22 +39,22 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 
     <!-- Stylesheets
     ================================================= -->
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/ionicons.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/ionicons.min.css" />
     <link rel="stylesheet" href="css/font-awesome.min.css" />
     
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
     
     <!--Favicon-->
-    <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
-	</head>
-	<body>
+    <link rel="shortcut icon" type="image/png" href="images/logo200.png"/>
+  </head>
+  <body>
 
     <!-- Header
     ================================================= -->
-		<header id="header-inverse">
+    <header id="header-inverse">
       <nav class="navbar navbar-default navbar-fixed-top menu">
         <div class="container">
 
@@ -66,7 +66,7 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index-register.html"><img src="images/logo.png" alt="logo" /></a>
+            <a class="navbar-brand" href="register.php"><img src="images/logo.png" alt="logo" /></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -87,16 +87,17 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
     <!-- Landing Page Contents
     ================================================= -->
     <div id="lp-register">
-    	<div class="container wrapper">
+      <div class="container wrapper">
         <div class="row">
-        	<div class="col-sm-5">
+          <div class="col-sm-5">
             <div class="intro-texts">
-            	<h1 class="text-white">We Are Millions!</h1>
-            	<p>Friend Finder is a social network template that can be used to connect people. The template offers Landing pages, News Feed, Image/Video Feed, Chat Box, Timeline and lot more. <br /> <br />Why are you waiting for? Buy it now.</p>
+              <h1 class="text-white">Make Cool Friends !</h1>
+              <img src="images/logo200w.png" alt="Penpal Journey"/><br><br>
+              <p class="fontbigger">This is another planet! Millions waiting inside come and join. <br /> <br /></p>
               <button class="btn btn-primary">Learn More</button>
             </div>
           </div>
-        	<div class="col-sm-6 col-sm-offset-1">
+          <div class="col-sm-6 col-sm-offset-1">
             <div class="reg-form-container"> 
             
               <!-- Register/Login Tabs-->
@@ -114,7 +115,7 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
                   <p class="text-muted">Be cool and join today. Meet millions</p>
                   
                   <!--Register Form-->
-                  <form action="nedmin/netting/islem.php" role="form" method="POST" name="registration_form" id='registration_form' class="form-inline">
+                  <form action="mail/kayitvalidation.php" role="form" method="POST" name="registration_form" id='registration_form' class="form-inline">
 
                  <?php 
 
@@ -431,7 +432,8 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
                                    <option value="Croatia">Croatia</option>
                                    <option value="Cuba">Cuba</option>
                                    <option value="Curaco">Curacao</option>
-                                   <option value="Cyprus">Cyprus</option>
+                                   <option value="North Cyprus">North Cyprus</option>
+                                   <option value="South Cyprus">South Cyprus</option>
                                    <option value="Czech Republic">Czech Republic</option>
                                    <option value="Denmark">Denmark</option>
                                    <option value="Djibouti">Djibouti</option>
@@ -489,7 +491,7 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
                                    <option value="Kenya">Kenya</option>
                                    <option value="Kiribati">Kiribati</option>
                                    <option value="Korea North">Korea North</option>
-                                   <option value="Korea Sout">Korea South</option>
+                                   <option value="Korea South">Korea South</option>
                                    <option value="Kuwait">Kuwait</option>
                                    <option value="Kyrgyzstan">Kyrgyzstan</option>
                                    <option value="Laos">Laos</option>
@@ -600,7 +602,7 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
                                    <option value="Tunisia">Tunisia</option>
                                    <option value="Turkey">Turkey</option>
                                    <option value="Turkmenistan">Turkmenistan</option>
-                                   <option value="Turks & Caicos Is">Turks & Caicos Is</option>
+                                   <option value="Turks & Caicos Is">Turks & Caicos Islands</option>
                                    <option value="Tuvalu">Tuvalu</option>
                                    <option value="Uganda">Uganda</option>
                                    <option value="United Kingdom">United Kingdom</option>
@@ -688,8 +690,8 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.appear.min.js"></script>
-		<script src="js/jquery.incremental-counter.js"></script>
+    <script src="js/jquery.incremental-counter.js"></script>
     <script src="js/script.js"></script>
     
-	</body>
+  </body>
 </html>

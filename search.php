@@ -29,16 +29,16 @@
               <div class="edit-profile-container">
                 
                 <div class="edit-block">
-                  <form name="basic-info" id="basic-info" class="form-inline">
+                  <form action="searchAdvance.php" method="POST" class="form-inline">
                     <div class="row">
                       <div class="form-group col-xs-3">
                         <label for="firstname">Age </label>
-                        <input id="firstname" class="form-control input-group-lg" type="text" name="firstname" title="Enter first name" placeholder="From" />
+                        <input id="firstname" class="form-control input-group-lg" type="number" name="one" title="Enter first name" placeholder="From" />
                       </div>
                       
                       <div class="form-group col-xs-3">
                         <label for="lastname" class="">Range</label>
-                        <input id="lastname" class="form-control input-group-lg" type="text" name="lastname" title="Enter last name" placeholder="To"  />
+                        <input id="lastname" class="form-control input-group-lg" type="number" name="two" title="Enter last name" placeholder="To"  />
                       </div>
                     </div>
 
@@ -57,7 +57,7 @@
                       <div class="row">
                        <div class="form-group  col-xs-6">
                         <label for="country" class="sr-only"></label>
-                          <select class="form-control" id="country">
+                          <select class="form-control" name="kullanici_country" id="country">
                                    <option value="Country" disabled selected>Country</option>
                                    <option value="Afganistan">Afghanistan</option>
                                    <option value="Albania">Albania</option>
@@ -115,7 +115,9 @@
                                    <option value="Croatia">Croatia</option>
                                    <option value="Cuba">Cuba</option>
                                    <option value="Curaco">Curacao</option>
-                                   <option value="Cyprus">Cyprus</option>
+                                   <option value="North Cyprus">North Cyprus</option>
+                                   <option value="South Cyprus">South Cyprus</option>
+
                                    <option value="Czech Republic">Czech Republic</option>
                                    <option value="Denmark">Denmark</option>
                                    <option value="Djibouti">Djibouti</option>
@@ -310,7 +312,7 @@
                     </div>
                     
 
-                    <button class="btn btn-primary">Search Members</button>
+                    <button class="btn btn-primary" name="advance" type="submit">Search Members</button>
                   </form>
                 </div>
               </div>
@@ -329,11 +331,12 @@
               </div>
                 
                 <div class="edit-block">
-                  <form name="basic-info" id="basic-info" class="form-inline">
+
+                  <form action="searchResult.php" method="post" id="basic-info" class="form-inline">
                     <div class="row">
                       <div class="form-group col-xs-12">
                         <label for="firstname">Name </label>
-                        <input id="firstname" class="form-control input-group-lg" type="text" name="firstname" title="Enter first name" placeholder="Username" />
+                        <input id="firstname" class="form-control input-group-lg" type="text" name="aranan" title="Enter first name" placeholder="Username" />
                       </div>
                       
                     </div>
@@ -342,7 +345,7 @@
 
                     
 
-                    <button class="btn btn-primary">Search</button>
+                    <button name="arama" class="btn btn-primary" type="submit">Search</button>
                   </form>
                 </div>
               </div>
